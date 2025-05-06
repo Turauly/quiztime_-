@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <h2 class="text-center mb-4">📊 Викторина нәтижесі</h2>
+
+  <div class="alert alert-info text-center">
+    <strong>Сіздің ұпайыңыз:</strong> {{ score }} / {{ total }}
+  </div>
+
+  <h4 class="mb-3">📝 Жауаптарыңыз:</h4>
+
+  <div class="row">
+    {% for item in answers_feedback %}
+      <div class="col-md-6">
+        <div class="card mb-4 {% if item.is_correct %}border-success{% else %}border-danger{% endif %}">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.question }}</h5>
+
+            <p>
+              Сіздің жауабыңыз:
+              <span class="fw-bold {% if item.is_correct %}text-success{% else %}text-danger{% endif %}">
+                {{ item.selected }}
+              </span>
+            </p>
+
+            <p class="mb-0">
+              Дұрыс жауап:
+              <span class="fw-semibold text-primary">{{ item.correct }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'quiz' %}" class="btn btn-primary me-2">🔁 Retake</a>
+    <a href="{% url 'statistics' %}" class="btn btn-outline-secondary">📊 Statistics</a>
+  </div>
+
+</div>
+{% endblock %}

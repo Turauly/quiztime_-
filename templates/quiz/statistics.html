@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">📊 Statistics</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card text-center border-primary mb-3">
+        <div class="card-header bg-primary text-white">
+          General Questions
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ total }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-center border-success mb-3">
+        <div class="card-header bg-success text-white">
+          Correct answers.
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ correct }}</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-center border-danger mb-3">
+        <div class="card-header bg-danger text-white">
+          Incorrect answers.
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ incorrect }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a href="{% url 'quiz' %}" class="btn btn-primary">🔁 Try again</a>
+  </div>
+</div>
+{% endblock %}

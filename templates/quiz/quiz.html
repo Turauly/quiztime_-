@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>🧠 Quiz</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    {% for question in questions %}
+        <div style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+            <p><strong>{{ question.text }}</strong></p>
+
+            {% for answer in question.answers.all %}
+                <label style="display: block; margin-left: 15px;">
+                    <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                    {{ answer.text }}
+                </label>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">✅ Submit</button>
+</form>
+
+<hr>
+<p>
+    <a href="{% url 'statistics' %}">📊 Suggest a new question</a>
+</p>
+<p>
+    <a href="{% url 'suggest_question' %}">➕ View my statistics</a>
+</p>
+{% endblock %}

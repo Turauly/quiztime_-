@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h1>👋 Welcome, {{ user.username }}!</h1>
+  <p class="lead">Welcome to the platform made for you!</p>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <a href="{% url 'quiz' %}" class="btn btn-outline-primary btn-lg w-100">🎯 Quizzes</a>
+    </div>
+    <div class="col-md-4">
+      <a href="{% url 'schedule' %}" class="btn btn-outline-success btn-lg w-100">📅 Schedule</a>
+    </div>
+      <div class="col-md-3">
+
+      <a href="{% url 'statistics' %}" class="btn btn-outline-info btn-lg w-100">📈 Statistics</a>
+      </div>
+
+
+   <div class="col-md-4">
+  <a href="{% url 'course_list' %}" class="btn btn-outline-warning btn-lg w-100">📚 Courses</a>
+</div>
+
+
+  <!-- 📊 Диаграмма бөлімі -->
+  <div class="mt-5">
+    <h4 class="mb-4">📊 Weekly Activity</h4>
+    <canvas id="activityChart" width="600" height="300"></canvas>
+  </div>
+</div>
+
+<!-- Chart.js қосу -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('activityChart').getContext('2d');
+  const activityChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon' , 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Number of responses',
+        data: [5, 3, 4, 2, 6, 0, 1],  // Келесі қадам: views.py арқылы динамикалық ету
+        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        borderRadius: 5
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          stepSize: 1
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}
